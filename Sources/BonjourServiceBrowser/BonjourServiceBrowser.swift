@@ -23,15 +23,15 @@ public class BonjourServiceBrowser{
         self.serviceDomain = serviceDomain
     }
 
-    public func start(queue: DispatchQueue, browserResultsChangeHandler: @escaping (Set<NWBrowser.Result>, Set<NWBrowser.Result.Change>) -> Void) -> Bool {
+    public func start(queue: DispatchQueue, browserResultsChangedHandler: @escaping (Set<NWBrowser.Result>, Set<NWBrowser.Result.Change>) -> Void) -> Bool {
         
         if let serviceType = self.serviceType,
            let serviceDomain = self.serviceDomain{
-            let descriptor = NWBrowser.Descriptor.bonjour(type:self.serviceType, domain:self.serviceDomain)
+            let descriptor = NWBrowser.Descriptor.bonjour(type:serviceType, domain:serviceDomain)
             browserQ = NWBrowser(for: descriptor, using: self.serviceParameter)
             if let browserQ = browserQ {
                 browserQ.stateUpdateHandler = serviceStateUpdateHandler
-                browserQ.browserResultsChangeHandler = browserResultsChangeHandler
+                browserQ.browserResultsChangedHandler = browserResultsChangedHandler
                 browserQ.start(queue: queue)
                 state = .started
                 return true
@@ -53,7 +53,7 @@ public class BonjourServiceBrowser{
     public func stop(){
         if let browserQ = browserQ{
             browserQ.stateUpdateHandler = nil
-            browserQ.cancle()
+            browserQ.cancel()
             state = .stopped
         }
     }
@@ -63,7 +63,7 @@ public class BonjourServiceBrowser{
     }
 }
 
-
+@available(iOS 13.0, *)
 extension BonjourServiceBrowser{
     public enum State {
         case not_started
