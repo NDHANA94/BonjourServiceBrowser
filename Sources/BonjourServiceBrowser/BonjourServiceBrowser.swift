@@ -21,6 +21,7 @@ public class BonjourServiceBrowser{
     public init(serviceType:String, serviceDomain:String, using:NWParameters){
         self.serviceType = serviceType
         self.serviceDomain = serviceDomain
+        self.serviceParameter = using
     }
 
     public func start(queue: DispatchQueue, browseResultsChangedHandler: @escaping (Set<NWBrowser.Result>, Set<NWBrowser.Result.Change>) -> Void) -> Bool {
