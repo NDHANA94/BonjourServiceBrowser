@@ -1,7 +1,7 @@
 import XCTest
-@testable import bonjourServiceBrowser
+@testable import BonjourServiceBrowser
 
-final class bonjourServiceBrowserTests: XCTestCase {
+final class BonjourServiceBrowserTests: XCTestCase {
     func testExample() throws {
         // XCTest Documentation
         // https://developer.apple.com/documentation/xctest

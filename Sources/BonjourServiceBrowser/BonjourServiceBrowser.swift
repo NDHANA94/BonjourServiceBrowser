@@ -1,18 +1,24 @@
 // The Swift Programming Language
 // https://docs.swift.org/swift-book
 
+
+// The Swift Programming Language
+// https://docs.swift.org/swift-book
+
 import Network
 import Foundation
 
+@available(iOS 13.0, *)
 public class BonjourServiceBrowser{
     public var state:State = .not_started
     private var browserQ:NWBrowser?
-    
+
     private var serviceType:String?
     private var serviceDomain:String?
     private var serviceParameter:NWParameters
 
-    public func config(serviceType:String, serviceDomain:String, using:NWParameters){
+
+    public init(serviceType:String, serviceDomain:String, using:NWParameters){
         self.serviceType = serviceType
         self.serviceDomain = serviceDomain
     }
