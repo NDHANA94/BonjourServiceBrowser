@@ -23,7 +23,7 @@ public class BonjourServiceBrowser{
         self.serviceDomain = serviceDomain
     }
 
-    public func start(queue: DispatchQueue, browserResultsChangedHandler: @escaping (Set<NWBrowser.Result>, Set<NWBrowser.Result.Change>) -> Void) -> Bool {
+    public func start(queue: DispatchQueue, browseResultsChangedHandler: @escaping (Set<NWBrowser.Result>, Set<NWBrowser.Result.Change>) -> Void) -> Bool {
         
         if let serviceType = self.serviceType,
            let serviceDomain = self.serviceDomain{
@@ -31,7 +31,7 @@ public class BonjourServiceBrowser{
             browserQ = NWBrowser(for: descriptor, using: self.serviceParameter)
             if let browserQ = browserQ {
                 browserQ.stateUpdateHandler = serviceStateUpdateHandler
-                browserQ.browserResultsChangedHandler = browserResultsChangedHandler
+                browserQ.browseResultsChangedHandler = browseResultsChangedHandler
                 browserQ.start(queue: queue)
                 state = .started
                 return true
